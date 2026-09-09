@@ -10,6 +10,7 @@
   1. DROPBOX  — o href do botão principal (id="enviar"). O botão "Copiar link" lê daqui.
   2. NOMES / DATA / MENSAGEM — no <main>, marcado com [EDITAR].
   3. PRAZO — a data em <span id="prazo">.
+  4. FOTO — img/hero-720.jpg e img/hero-1080.jpg (mesmo recorte, dois tamanhos).
   Sem fontes externas nem scripts remotos de propósito: a página tem de abrir com uma barra de rede.
 -->
 <style>
@@ -31,14 +32,22 @@
     min-height:100dvh; display:flex; flex-direction:column;
     -webkit-font-smoothing:antialiased;
   }
-  main{width:min(100% - 2.5rem, 24rem); margin:auto; padding:3rem 0 2.5rem; text-align:center}
+  main{width:min(100% - 2.5rem, 24rem); margin:auto; padding:0 0 2.5rem; text-align:center}
 
-  .nomes{font-weight:400; font-size:clamp(2.6rem,12vw,3.4rem); line-height:1.05; margin:0; letter-spacing:-.01em}
-  .nomes span{display:block; font-style:italic; font-size:.5em; line-height:1.4; color:var(--tinta-suave)}
-  .data{margin:1rem 0 0; font-size:1rem; color:var(--tinta-suave)}
-  .data::after{content:""; display:block; width:3rem; height:1px; background:var(--fio); margin:1.75rem auto 0}
+  /* Foto de abertura: sangra até às bordas no telemóvel, fica na coluna com cantos suaves em ecrãs largos */
+  .hero{position:relative; margin:0 calc(50% - 50vw) 0; overflow:hidden; background:var(--tinta)}
+  .hero img{display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover}
+  .hero figcaption{
+    position:absolute; inset:auto 0 0 0; padding:5rem 1.25rem 1.5rem; color:#fff; text-align:center;
+    background:linear-gradient(to bottom, rgba(20,34,29,0) 0%, rgba(20,34,29,.55) 55%, rgba(20,34,29,.8) 100%);
+  }
+  @media (min-width: 30rem){ .hero{margin:2rem 0 0; border-radius:.75rem} }
 
-  .mensagem{margin:1.75rem 0 2.25rem; text-align:left}
+  .nomes{font-weight:400; font-size:clamp(2.6rem,12vw,3.4rem); line-height:1.05; margin:0; letter-spacing:-.01em; color:#fff; text-shadow:0 1px 12px rgba(0,0,0,.35)}
+  .nomes span{display:inline; font-style:italic; font-size:.6em; margin:0 .15em; color:var(--fio)}
+  .data{margin:.5rem 0 0; font-size:1rem; color:rgba(255,255,255,.85)}
+
+  .mensagem{margin:2rem 0 2.25rem; text-align:left}
   .mensagem p{margin:0 0 .9em}
 
   .botao{
@@ -68,10 +77,18 @@
 </head>
 <body>
 <main>
-  <!-- [EDITAR] nomes -->
-  <h1 class="nomes">Ana<span>&amp;</span>Pedro</h1>
-  <!-- [EDITAR] data -->
-  <p class="data">26 de Setembro de 2026</p>
+  <figure class="hero">
+    <!-- Foto: img/hero-*.jpg (recorte 4:5, 72 KB e 135 KB). O browser escolhe o tamanho conforme o ecrã. -->
+    <img src="img/hero-1080.jpg" srcset="img/hero-720.jpg 720w, img/hero-1080.jpg 1080w"
+         sizes="(min-width: 30rem) 24rem, 100vw" width="1080" height="1350"
+         alt="Ana e Pedro abraçados numa piscina, com a serra e o rio ao fundo" fetchpriority="high" decoding="async">
+    <figcaption>
+      <!-- [EDITAR] nomes -->
+      <h1 class="nomes">Ana<span>&amp;</span>Pedro</h1>
+      <!-- [EDITAR] data -->
+      <p class="data">26 de Setembro de 2026</p>
+    </figcaption>
+  </figure>
 
   <!-- [EDITAR] mensagem -->
   <div class="mensagem">
