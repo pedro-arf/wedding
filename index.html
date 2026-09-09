@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ana &amp; Pedro — as vossas fotos do dia</title>
+<!--
+  O QUE EDITAR (tudo neste ficheiro, nada mais):
+  1. DROPBOX  — o href do botão principal (id="enviar"). O botão "Copiar link" lê daqui.
+  2. NOMES / DATA / MENSAGEM — no <main>, marcado com [EDITAR].
+  3. PRAZO — a data em <span id="prazo">.
+  Sem fontes externas nem scripts remotos de propósito: a página tem de abrir com uma barra de rede.
+-->
+<style>
+  :root{
+    --papel:#F4F6F2;     /* fundo, verde-cinza muito claro */
+    --tinta:#1C2E27;     /* texto e botão, verde-garrafa */
+    --tinta-suave:#5A6B63;
+    --fio:#B9A96F;       /* linha dourada baça */
+    --fio-claro:#D8CFAE;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --papel:#141C19; --tinta:#EEF1EC; --tinta-suave:#A7B3AC; --fio:#B9A96F; --fio-claro:#4A5148; }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--papel);color:var(--tinta)}
+  body{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    font-size:1.0625rem; line-height:1.6;
+    min-height:100dvh; display:flex; flex-direction:column;
+    -webkit-font-smoothing:antialiased;
+  }
+  main{width:min(100% - 2.5rem, 24rem); margin:auto; padding:3rem 0 2.5rem; text-align:center}
+
+  .nomes{font-weight:400; font-size:clamp(2.6rem,12vw,3.4rem); line-height:1.05; margin:0; letter-spacing:-.01em}
+  .nomes span{display:block; font-style:italic; font-size:.5em; line-height:1.4; color:var(--tinta-suave)}
+  .data{margin:1rem 0 0; font-size:1rem; color:var(--tinta-suave)}
+  .data::after{content:""; display:block; width:3rem; height:1px; background:var(--fio); margin:1.75rem auto 0}
+
+  .mensagem{margin:1.75rem 0 2.25rem; text-align:left}
+  .mensagem p{margin:0 0 .9em}
+
+  .botao{
+    display:block; width:100%; padding:1rem 1.25rem;
+    background:var(--tinta); color:var(--papel);
+    text-decoration:none; font:inherit; font-size:1.125rem; font-weight:600;
+    border:0; border-radius:.5rem; cursor:pointer;
+  }
+  .botao:focus-visible, .copiar:focus-visible{outline:3px solid var(--fio); outline-offset:3px}
+  .botao:active{transform:translateY(1px)}
+  .ajuda{margin:.85rem 0 0; font-size:.9375rem; color:var(--tinta-suave); text-align:left}
+
+  .depois{
+    margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--fio-claro);
+    text-align:left; font-size:.9375rem; color:var(--tinta-suave);
+  }
+  .depois h2{font-size:1.0625rem; font-weight:600; margin:0 0 .4rem; color:var(--tinta)}
+  .depois p{margin:0 0 .75rem}
+  .copiar{
+    font:inherit; font-size:.9375rem; padding:.55rem .95rem; border-radius:.4rem;
+    background:transparent; color:var(--tinta); border:1px solid var(--tinta); cursor:pointer;
+  }
+  .copiar[data-ok]{border-style:dashed}
+  .privado{margin:2.25rem 0 0; font-size:.875rem; color:var(--tinta-suave)}
+  @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<main>
+  <!-- [EDITAR] nomes -->
+  <h1 class="nomes">Ana<span>&amp;</span>Pedro</h1>
+  <!-- [EDITAR] data -->
+  <p class="data">26 de Setembro de 2026</p>
+
+  <!-- [EDITAR] mensagem -->
+  <div class="mensagem">
+    <p>Partilha connosco os momentos que só tu capturaste e ajuda-nos a ter ainda mais memórias deste dia tão especial para nós!</p>
+  </div>
+
+  <!-- [EDITAR] DROPBOX: substituir o href pelo link do file request -->
+  <a id="enviar" class="botao" href="https://www.dropbox.com/request/SUBSTITUIR_PELO_LINK">Enviar fotos e vídeos</a>
+  <p class="ajuda">Abre no browser, sem conta nem instalação. Podes escolher vários ficheiros de cada vez; vídeos até 2 GB cada.</p>
+
+  <section class="depois">
+    <h2>Sem rede agora?</h2>
+    <p>Não há pressa. Guarda esta página e envia mais tarde. O link fica activo até <span id="prazo">31 de Outubro</span>.</p>
+    <button class="copiar" type="button" id="copiar">Copiar link</button>
+  </section>
+
+  <p class="privado">Tudo o que enviares fica privado, só nós vemos os ficheiros.</p>
+</main>
+
+<script>
+  (function(){
+    var btn = document.getElementById('copiar');
+    var url = document.getElementById('enviar').href;
+    btn.addEventListener('click', function(){
+      var done = function(){ btn.textContent = 'Link copiado'; btn.setAttribute('data-ok',''); setTimeout(function(){ btn.textContent='Copiar link'; btn.removeAttribute('data-ok'); }, 2500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(done, function(){ window.prompt('Copie o link:', url); });
+      } else { window.prompt('Copie o link:', url); }
+    });
+  })();
+</script>
+</body>
+</html>
