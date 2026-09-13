@@ -7,7 +7,7 @@
 <title>Ana &amp; Pedro - 26 Set. 26</title>
 <!--
   O QUE EDITAR (tudo neste ficheiro, nada mais):
-  1. DROPBOX  — o href do botão principal (id="enviar"). O botão "Copiar link" lê daqui.
+  1. WEDIBOX — o data-event no <div id="wedibox-embed">, e o href de #alternativa (photo page).
   2. NOMES / DATA / MENSAGEM — no <main>, marcado com [EDITAR].
   3. PRAZO — a data em <span id="prazo">.
   4. FOTO — img/hero-720.jpg e img/hero-1080.jpg (mesmo recorte, dois tamanhos).
@@ -95,9 +95,14 @@
     <p>Partilha connosco os momentos que só tu capturaste e ajuda-nos a ter ainda mais memórias deste dia tão especial para nós!</p>
   </div>
 
-  <!-- [EDITAR] DROPBOX: substituir o href pelo link do file request -->
-  <a id="enviar" class="botao" href="https://www.dropbox.com/request/dl17sov1s0t2sukpqvt1">Enviar fotos e vídeos</a>
-  <p class="ajuda">Abre no browser, sem conta nem instalação. Podes escolher vários ficheiros de cada vez; vídeos até 2 GB cada.</p>
+  <!-- WIDGET WEDIBOX: carrega de embed.wedibox.com e injecta o botão de upload aqui dentro -->
+<div id="wedibox-embed" data-event="2a757fc4-45ff-4a1b-affc-7bf6ec4a761e"></div>
+<script src="https://embed.wedibox.com/widget.js" async></script>
+
+  <!-- Rede de segurança: HTML puro, funciona mesmo que o script acima não carregue.
+       [EDITAR] href = link da "photo page" do Wedibox (dashboard → Button or link). -->
+  <noscript><p class="ajuda">Precisas de JavaScript activo. Se não abrir, usa o link em baixo.</p></noscript>
+  <p class="ajuda">Não aparece o botão de envio? <a id="alternativa" href="https://www.wedibox.com/w/photo-collection/recQSvD9YxkIn7AE">Abre esta página</a> e envia por aí.</p>
 
   <section class="depois">
     <h2>Sem rede agora?</h2>
@@ -111,7 +116,7 @@
 <script>
   (function(){
     var btn = document.getElementById('copiar');
-    var url = document.getElementById('enviar').href;
+    var url = window.location.href.split('#')[0];
     btn.addEventListener('click', function(){
       var done = function(){ btn.textContent = 'Link copiado'; btn.setAttribute('data-ok',''); setTimeout(function(){ btn.textContent='Copiar link'; btn.removeAttribute('data-ok'); }, 2500); };
       if (navigator.clipboard && navigator.clipboard.writeText) {
