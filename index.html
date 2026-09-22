@@ -59,6 +59,10 @@
   .botao:focus-visible, .copiar:focus-visible{outline:3px solid var(--fio); outline-offset:3px}
   .botao:active{transform:translateY(1px)}
   .ajuda{margin:.85rem 0 0; font-size:.9375rem; color:var(--tinta-suave); text-align:left}
+  /* Links na paleta: texto na tinta da página, sublinhado dourado. :visited igual,
+     senão o browser pinta-os de roxo depois da primeira visita. */
+  a, a:visited{color:var(--tinta); text-decoration-color:var(--fio); text-decoration-thickness:1px; text-underline-offset:3px}
+  a:hover{text-decoration-color:var(--tinta)}
 
   .depois{
     margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--fio-claro);
